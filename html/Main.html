@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <link rel="stylesheet" href="../css/style.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Movie World</title>
+  </head>
+  <body>
+    <section class="inner_content new_index">
+      <div id="media_v4" class="media discover">
+        <div class="column_wrapper">
+          <div class="content_wrapper wrap">
+            <div class="title">
+              <h2>영화세상</h2>
+              <h3> 최신영화, 공포, 코미디, 한국영화, 외국영화 </h3>
+            </div>
+            <div class="search">
+              <form class="form">
+                <input
+                  type="text"
+                  id="guessField"
+                  class="guessField"
+                  placeholder="영화, TV 프로그램, 인물 검색..."
+                />
+                <button type="submit" id="submitButton">
+                  확인
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="mycards">
+      <div class="flex_container row row-cols-1 row-cols-md-3 g-4">
+        <!-- 영화 카드가 여기에 표시 -->
+      </div>
+    </div>
+    <script>
+      // API 키 설정
+      const apiKey = '444663ba80f0a67ce6fe0e5bb4e1bf31';
+
+      // API 요청에 필요한 설정
+      const apiUrl = 'https://api.themoviedb.org/3/discover/movie';
+      const options = {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDQ2NjNiYTgwZjBhNjdjZTZmZTBlNWJiNGUxYmYzMSIsInN1YiI6IjY1MzBiZjYyNTFhNjRlMDBlOWQwYmI0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.D54_b5TlDueul7ZGF3uZr-tx2T7K7qpiuzMLGd99iAE`
+        }
+      };
+
+      // 영화 카드를 생성하는 함수
+      function createCard(movie) {
+        const card = document.createElement('div');
+        card.className = 'col';
+        card.innerHTML = `
+          <div class="card h-100">
+            <img src="https://www.themoviedb.org/t/p/w500_and_h282_face/${movie.poster_path}" />
+            <div class="card-body">
+              <h5 class="card-title">${movie.title}</h5>
+              <p class="card-text">${movie.overview}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-body-secondary">${movie.release_date}</small>
+            </div>
+          </div>
+        `;
+        return card;
+      }
+
+      // 영화 카드를 화면에 표시하는 함수
+      function displayCards(data, searchTitle) {
+        const cardContainer = document.querySelector('.mycards .flex_container');
+        cardContainer.innerHTML = ''; // 이전 카드 내용 초기화
+
+        data.results.forEach(movie => {
+          if (movie.title.toLowerCase().includes(searchTitle.toLowerCase())) {
+            const card = createCard(movie);
+            cardContainer.appendChild(card);
+          }
+        });
+      }
+
+      // 검색 버튼 클릭 이벤트 처리
+      const submitButton = document.getElementById('submitButton');
+      const guessField = document.getElementById('guessField');
+      submitButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const searchTitle = guessField.value; // 입력란의 검색어 가져오기
+        fetchMovies(searchTitle);
+      });
+
+      // 영화 데이터를 가져오는 함수
+      function fetchMovies(searchTitle) {
+        fetch(`${apiUrl}?query=${searchTitle}`, options)
+          .then(response => response.json())
+          .then(data => displayCards(data, searchTitle))
+          .catch(err => console.error(err));
+      }
+    </script>
+  </body>
+</html>

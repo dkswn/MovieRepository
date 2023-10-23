@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section.new_index div.media {
+    height: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://img.lovepik.com/background/20211022/medium/lovepik-film-background-board-film-background-image_500877889.jpg");
+    margin: 0px auto 20px auto;
+    border: 1px solid white;
+    padding: 20px;
+    border-radius: 5px;
+}
+section.new_index {
+    min-height: 300px;
+    height: calc(100vh/2.5);
+    max-height: 360px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+section.new_index form input[type=text] {
+    width: 700px;
+    height: 46px;
+    line-height: 46px;
+    font-size: 1.1em;
+    color: rgba(0,0,0,.5);
+    border: 0;
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+.ShBtn{
+    border-radius: 20%;
+    font-size: x-large;
+    color: rgba(0,0,0,.5);
+    font-size:21px;
+    padding-bottom: 6.5px;
+    margin-block: 13px;
+    color:black;
+}
+.flex_container {
+    display: flex;
+    padding-top: 100px;
+}
+ .mycards {
+     width: 1200px;
+     display:flex;
+     flex-wrap:wrap;
+     text-align:center;
+     margin:auto;
+     font-size: xx-large;
+     border-radius: 20px;
+      }
+ #submitButton {
+  width: 110px;
+  height: 55px;
+  color: #fff;
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 15px;
+  font-size: 30px;
+  border-style: none;
+  margin-left: 4px;
+     padding-bottom: 45px;
+
+}
+
+ #submitButton:hover {
+  background-color: #e3e3e3;
+}
+
+#submitButton:disabled {
+  background-color: #e2e8f0;
+}
+
+
+
+
+
+
+
